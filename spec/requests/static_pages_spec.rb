@@ -1,17 +1,20 @@
 require 'spec_helper'
 
 describe "StaticPages" do
+  let(:base_title) { "SecretSquirrel Sample App" }
   
   describe "Home Page" do
     it "should have the h1 'Sample App'" do
     	visit '/static_pages/home'
     	page.should have_selector('h1', :text => 'Sample App')
     end
-    
-    it "should have title 'Home'" do
+    it "shoud have the base title" do
     	visit '/static_pages/home'
-    	page.should have_selector('title', 
-    	                  :text => "SecretSquirrel Sample App | Home")
+    	page.should have_selector('title', :text => base_title)
+    end
+    it "should not have a custom page title" do
+    	visit '/static_pages/home'
+    	page.should_not have_selector('title', :text => '| Home')
     end
   end
   
@@ -20,25 +23,43 @@ describe "StaticPages" do
   		visit '/static_pages/help'
   		page.should have_selector('h1', :text => 'Help')
   	end
-  	
-    it "should have title 'Help'" do
+    it "should have base title" do
     	visit '/static_pages/help'
-    	page.should have_selector('title', 
-    	                  :text => "SecretSquirrel Sample App | Help")
+    	page.should have_selector('title', :text => base_title)
+    end
+    it "should not have a custom page title" do
+    	visit '/static_pages/help'
+    	page.should_not have_selector('title', :text => '| Help')
     end
   end
 
-  describe "About page" do
-
+  describe "About Page" do
     it "should have the h1 'About Me'" do
       visit '/static_pages/about'
       page.should have_selector('h1', :text => 'About Me')
     end
-  	
-    it "should have title 'About Me'" do
+    it "should have base title" do
     	visit '/static_pages/about'
-    	page.should have_selector('title', 
-    	                  :text => "SecretSquirrel Sample App | About Me")
+    	page.should have_selector('title', :text => base_title)
+    end
+    it "should not have a custom page title" do
+    	visit '/static_pages/about'
+    	page.should_not have_selector('title', :text => '| About Me')
+    end
+  end
+  
+  describe "Contact Page" do
+  	it "should have the h1 'Contact'" do
+  		visit '/static_pages/contact'
+  		page.should have_selector('h1', :text => 'Contact')
+  	end
+  	it "should have base title" do
+  		visit '/static_pages/contact'
+  		page.should have_selector('title', :text => base_title)
+    end
+    it "should not have a custom page title" do
+    	visit '/static_pages/contact'
+    	page.should_not have_selector('title', :text => '| Contact')
     end
   end
   
