@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.12'
 gem 'pg', '0.12.2'
+gem 'bootstrap-sass', '2.1'
 
 group :development, :test do
 #  gem 'sqlite3', '1.3.5'
@@ -26,8 +27,8 @@ group :test do
   gem 'rb-fchange', '0.0.5'
   gem 'rb-notifu', '0.0.4'
   gem 'win32console', '1.3.0'
-end
+  gem 'sqlite3', '1.3.5'end
 
-group :production do
-  gem 'pg', '0.12.2'
-end
+#group :production do
+#  gem 'pg', '0.12.2'
+#end
