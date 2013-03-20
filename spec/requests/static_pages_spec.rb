@@ -19,11 +19,22 @@ describe "StaticPages" do
       let(:user) { FactoryGirl.create(:user) }
       before do
         FactoryGirl.create(:micropost, user: user, content: "Lorem ipsum")
-        FactoryGirl.create(:micropost, user: user, content: "Dolor sit amet")
         sign_in user
         visit root_path
       end
-
+      
+      describe "with one post" do
+        it { should have_content("1 micropost") }
+      end
+      
+      describe "with multiple posts" do
+        before do
+          FactoryGirl.create(:micropost, user: user, content: "Lorem ipsum")
+          visit root_path
+        end
+        it { should have_content("2 microposts") }
+      end
+     
       it "should render the user's feed" do
         user.feed.each do |item|
           page.should have_selector("li##{item.id}", text: item.content)
